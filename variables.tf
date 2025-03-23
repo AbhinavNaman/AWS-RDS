@@ -4,6 +4,11 @@ variable "OPENSSH_PRIVATE_KEY" {
   sensitive   = true
 }
 
+variable "ssh_private_key_path" {
+  description = "value"
+  type = string
+}
+
 variable "OPENSSH_PUBLIC_KEY" {
   description = "this is used for SSH-ing to the ec2 instance"
   type = string

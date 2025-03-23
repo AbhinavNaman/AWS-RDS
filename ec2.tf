@@ -20,7 +20,7 @@ resource "aws_instance" "bastion" {
     connection {
       type = "ssh"
       user = "ubuntu"
-      private_key = var.OPENSSH_PRIVATE_KEY
+      private_key = file(var.ssh_private_key_path)
       host = self.public_ip
     }
   }

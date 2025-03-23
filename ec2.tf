@@ -4,5 +4,25 @@ resource "aws_instance" "bastion" {
   subnet_id = data.aws_subnets.default.ids[0]
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
   associate_public_ip_address = true
-  key_name = 
+  key_name = aws_key_pair.example.key_name
+
+  tags ={
+    Name = "psql-bastion-host"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+        "sudo apt update -y",
+        "sudo apt install -y postgresql-client",
+        "PGPASSWORD='postgresdb' psql -h ${aws_db_instance.postgres.address} -U postgresdb -d postgresdb -c CREATE TABLE IF NOT EXISTS terraformMetrics (id TEXT PRIMARY KEY, success BOOLEAN NOT NULL, timestamp TIMESTAMPTZ DEFAULT NOW(), applied_resources TEXT[], failed_resources TEXT[], created_resources TEXT[], updated_resources TEXT[], deleted_resources TEXT[], total_time INTEGER NOT NULL, error_messages TEXT[]);\""
+    ]
+
+    connection {
+      type = "ssh"
+      user = "ubuntu"
+      private_key = var.OPENSSH_PRIVATE_KEY
+      host = self.public_ip
+    }
+  }
 }
+

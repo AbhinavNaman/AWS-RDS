@@ -1,0 +1,9 @@
+aws_region = "us-east-1"
+allowed_cidr_blocks   = ["0.0.0.0/0"]
+db_identifier         = "postgresdb"
+db_name               = "postgresdb"
+db_password           = "postgresdb"
+engine_version        = "13.20"
+instance_class        = "db.t3.micro"
+allocated_storage     = 20
+max_allocated_storage = 100

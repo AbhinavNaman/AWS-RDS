@@ -7,7 +7,7 @@ resource "aws_db_subnet_group" "rds_subnet_group" {
   }
 }
 
-resource "aws_security_group" "rds_sg-2" {
+resource "aws_security_group" "rds_sg-2-2" {
   name        = "rds-sg"
   description = "Allow RDS access"
   vpc_id      = data.aws_vpc.default.id
@@ -50,7 +50,7 @@ resource "aws_db_instance" "postgres" {
   password = var.db_password
   port     = 5432
 
-  vpc_security_group_ids = [aws_security_group.rds_sg.id]
+  vpc_security_group_ids = [aws_security_group.rds_sg-2.id]
   db_subnet_group_name = aws_db_subnet_group.rds_subnet_group.name
 
   multi_az            = false

@@ -7,7 +7,7 @@ resource "aws_db_subnet_group" "rds_subnet_group" {
   }
 }
 
-resource "aws_security_group" "rds_sg" {
+resource "aws_security_group" "rds_sg-2" {
   name        = "rds-sg"
   description = "Allow RDS access"
   vpc_id      = data.aws_vpc.default.id
@@ -140,3 +140,4 @@ resource "aws_db_instance" "postgres" {
 
 
 # to trigger actions
+# 2

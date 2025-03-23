@@ -32,6 +32,8 @@ resource "aws_security_group" "rds_sg" {
   }
 }
 
+
+
 //AWS RDS postgres DB instance
 resource "aws_db_instance" "postgres" {
   identifier            = var.db_identifier
@@ -135,3 +137,6 @@ resource "aws_db_instance" "postgres" {
 #     column = ["id"]
 #   }
 # }
+
+
+# to trigger actions

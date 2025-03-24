@@ -16,10 +16,22 @@ data "aws_subnets" "default" {
     values = [data.aws_vpc.default.id]
   }
 }
-resource "aws_key_pair" "example" {
-  key_name   = "terraform-rds"
-  public_key = var.OPENSSH_PUBLIC_KEY
-}
+
+# resource "aws_key_pair" "example" {
+#   key_name   = "terraform-rds"
+#   public_key = var.OPENSSH_PUBLIC_KEY
+# }
+
+
+
+
+
+
+
+
+
+
+
 
 # https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs
 # The PostgreSQL provider gives the ability to deploy and configure resources in a PostgreSQL server.

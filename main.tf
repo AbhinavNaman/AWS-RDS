@@ -7,30 +7,30 @@ resource "aws_db_subnet_group" "rds_subnet_group" {
   }
 }
 
-resource "aws_security_group" "rds_sg" {
-  name        = "rds-sg"
-  description = "Allow RDS access"
-  vpc_id      = data.aws_vpc.default.id
+# resource "aws_security_group" "rds_sg" {
+#   name        = "rds-sg"
+#   description = "Allow RDS access"
+#   vpc_id      = data.aws_vpc.default.id
 
-  ingress {
-    from_port   = 5432
-    to_port     = 5432
-    protocol    = "tcp"
-    cidr_blocks = var.allowed_cidr_blocks
-  }
+#   ingress {
+#     from_port   = 5432
+#     to_port     = 5432
+#     protocol    = "tcp"
+#     cidr_blocks = var.allowed_cidr_blocks
+#   }
 
-  # allow all outbound traffic
-  egress {
-    from_port   = 0             # all ports
-    to_port     = 0             # all ports
-    protocol    = "-1"          # all protocols 
-    cidr_blocks = ["0.0.0.0/0"] # all IP addresses
-  }
+#   # allow all outbound traffic
+#   egress {
+#     from_port   = 0             # all ports
+#     to_port     = 0             # all ports
+#     protocol    = "-1"          # all protocols 
+#     cidr_blocks = ["0.0.0.0/0"] # all IP addresses
+#   }
 
-  tags = {
-    Name = "RDS security group"
-  }
-}
+#   tags = {
+#     Name = "RDS security group"
+#   }
+# }
 
 
 
@@ -50,7 +50,7 @@ resource "aws_db_instance" "postgres" {
   password = var.db_password
   port     = 5432
 
-  vpc_security_group_ids = [aws_security_group.rds_sg.id]
+  vpc_security_group_ids = [data.aws_security_group.rds_sg.id]
   db_subnet_group_name   = aws_db_subnet_group.rds_subnet_group.name
 
   multi_az            = false

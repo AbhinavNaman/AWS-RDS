@@ -1,17 +1,17 @@
 variable "OPENSSH_PRIVATE_KEY" {
   description = "this is used for SSH-ing to the ec2 instance"
-  type = string
+  type        = string
   sensitive   = true
 }
 
 variable "ssh_private_key_path" {
   description = "value"
-  type = string
+  type        = string
 }
 
 variable "OPENSSH_PUBLIC_KEY" {
   description = "this is used for SSH-ing to the ec2 instance"
-  type = string
+  type        = string
 }
 
 variable "aws_region" {

@@ -1,4 +1,4 @@
-aws_region = "us-east-1"
+aws_region            = "us-east-1"
 allowed_cidr_blocks   = ["0.0.0.0/0"]
 db_identifier         = "postgresdb"
 db_name               = "postgresdb"

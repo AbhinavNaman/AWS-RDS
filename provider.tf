@@ -17,10 +17,10 @@ data "aws_subnets" "default" {
   }
 }
 
-# resource "aws_key_pair" "example" {
-#   key_name   = "terraform-rds"
-#   public_key = var.OPENSSH_PUBLIC_KEY
-# }
+resource "aws_key_pair" "example" {
+  key_name   = "terraform-rds"
+  public_key = var.OPENSSH_PUBLIC_KEY
+}
 
 
 

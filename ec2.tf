@@ -14,8 +14,22 @@ resource "aws_instance" "bastion" {
     inline = [
       "sudo apt update -y",
       "sudo apt install -y postgresql-client",
-      "PGPASSWORD='postgresdb' psql -h ${aws_db_instance.postgres.address} -U postgresdb -d postgresdb -c CREATE TABLE IF NOT EXISTS terraformMetrics (id TEXT PRIMARY KEY, success BOOLEAN NOT NULL, timestamp TIMESTAMPTZ DEFAULT NOW(), applied_resources TEXT[], failed_resources TEXT[], created_resources TEXT[], updated_resources TEXT[], deleted_resources TEXT[], total_time INTEGER NOT NULL, error_messages TEXT[]);\""
+      <<EOT
+    PGPASSWORD='postgresdb' psql -h ${aws_db_instance.postgres.address} -U postgresdb -d postgresdb -c "CREATE TABLE IF NOT EXISTS terraformMetrics (
+    id TEXT PRIMARY KEY,
+    success BOOLEAN NOT NULL,
+    timestamp TIMESTAMPTZ DEFAULT NOW(),
+    applied_resources TEXT[],
+    failed_resources TEXT[],
+    created_resources TEXT[],
+    updated_resources TEXT[],
+    deleted_resources TEXT[],
+    total_time INTEGER NOT NULL,
+    error_messages TEXT[]
+    );"
+    EOT
     ]
+
 
     connection {
       type        = "ssh"

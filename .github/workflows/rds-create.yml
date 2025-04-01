@@ -12,6 +12,13 @@ jobs:
         steps:
           - name: Checkout Code
             uses: actions/checkout@v3
+
+            # here instead of setting up an EC2 instance to install and run psql command, i will try to install and run in github runner
+          - name: Setup PostgreSQL
+            uses: tj-actions/install-postgresql@v3
+            with:
+                postgresql-version: 17
+            # _______________________________
             
           - name: install terraform
             uses: hashicorp/setup-terraform@v3
